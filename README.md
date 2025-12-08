@@ -44,8 +44,8 @@ A full-stack todo application built with **React**, **Node.js**, **Express**, **
 
 1. **Clone the repository:**
    ```
-   git clone <url>
-   cd todo-app-coveragex
+   git clone <https://github.com/Sabryilyas/todo-app-assessment.git>
+   cd todo-app-assessment
 
 Start all services:
 
