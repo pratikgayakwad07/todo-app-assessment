@@ -38,4 +38,9 @@ build/
 .terraform/
 *.tfstate
 *.tfstate.*
-.terraform.lock.hcl
+crash.log
+override.tf
+override.tf.json
+terraform.tfvars
+*.terraform.lock.hcl
+
