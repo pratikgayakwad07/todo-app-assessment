@@ -1,0 +1,11 @@
+output "vpc_output" {
+  value = aws_vpc.app_vpc.id
+}
+
+output "public_subnets" {
+  value = aws_subnet.public[*].id
+}
+
+output "private_subnets" {
+  value = aws_subnet.private[*].id
+}

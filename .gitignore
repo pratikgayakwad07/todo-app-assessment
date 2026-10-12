@@ -33,3 +33,8 @@ build/
 
 # Docker
 *. log
+
+#Teraform
+*.tfstate
+.terraform/
+.terraform.lock.hcl
