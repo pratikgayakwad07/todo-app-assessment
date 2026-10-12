@@ -11,12 +11,10 @@ on:
   workflow_dispatch:
 
 permissions:
-  id-token: write   # Required for requesting the JWT via OIDC
-  contents: read    # Required for actions/checkout
+  contents: read
 
 env:
   AWS_REGION: us-east-1
-  ROLE_TO_ASSUME: ${{ secrets.AWS_ROLE_TO_ASSUME }} # Set to arn:aws:iam::<account-id>:role/todo-app-github-actions-role
   ECS_CLUSTER: todo-app-dev-cluster
   FRONTEND_SERVICE: todo-app-dev-frontend-svc
   BACKEND_SERVICE: todo-app-dev-backend-svc
