@@ -28,8 +28,8 @@ allocated_storage     = 20
 max_allocated_storage = 50
 
 # ECS Fargate Desired Tasks
-frontend_desired_count = 1
-backend_desired_count  = 1
+frontend_desired_count = 2
+backend_desired_count  = 2
 
 # Monitoring Alerts (Optional: Set your alert email)
 alert_email = "pratikgayakwad322@gmail.com"
