@@ -8,7 +8,7 @@ on:
     workflows: ["Terraform"]
     types:
       - completed
-  workflow_dispatch: 
+  workflow_dispatch:
 
 permissions:
   id-token: write   # Required for requesting the JWT via OIDC
@@ -45,7 +45,7 @@ jobs:
         run: |
           cd backend
           npm ci
-          npm test
+          npm run test:unit
 
       - name: Install & Build Frontend
         run: |
@@ -117,4 +117,3 @@ jobs:
           echo "Waiting for services to stabilize..."
           aws ecs wait services-stable --cluster $ECS_CLUSTER --services $FRONTEND_SERVICE $BACKEND_SERVICE
           echo "Deployment successful!"
-

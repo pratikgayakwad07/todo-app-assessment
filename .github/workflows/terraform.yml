@@ -5,8 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "terraform/"
-
+      - "terraform/**"
   workflow_dispatch:
 
 jobs:
@@ -16,7 +15,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: terraform/
+        working-directory: terraform
 
     steps:
       - name: Checkout code
@@ -43,4 +42,3 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
-
