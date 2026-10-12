@@ -34,7 +34,8 @@ build/
 # Docker
 *. log
 
-#Teraform
-*.tfstate
+# Terraform local files
 .terraform/
+*.tfstate
+*.tfstate.*
 .terraform.lock.hcl
