@@ -3,21 +3,38 @@ const cors = require('cors');
 // CORS configuration to allow frontend to communicate with backend
 const corsOptions = {
   origin: function (origin, callback) {
-    // Allow requests from our frontend or no origin (like Postman)
-    const allowedOrigins = [
-      process.env.CLIENT_URL || 'http://localhost:5173',
-      'http://localhost:5173',
-      'http://localhost:3000' // backup in case someone uses different port
+    // Allow requests with no origin (mobile apps, Postman, curl, server-to-server)
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    // Whitelist:
+    // - localhost dev servers
+    // - Any AWS ELB or CloudFront domain (for production)
+    // - CLIENT_URL env variable can override for custom domains
+    const allowedPatterns = [
+      /^http:\/\/localhost(:\d+)?$/,
+      /^https?:\/\/.*\.elb\.amazonaws\.com$/,
+      /^https?:\/\/.*\.cloudfront\.net$/,
     ];
 
-    // Allow requests with no origin (mobile apps, Postman, etc.)
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+    const clientUrl = process.env.CLIENT_URL;
+    if (clientUrl) {
+      try {
+        allowedPatterns.push(new RegExp(`^${clientUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`));
+      } catch (_) {}
+    }
+
+    const isAllowed = allowedPatterns.some((pattern) => pattern.test(origin));
+
+    if (isAllowed) {
       callback(null, true);
     } else {
+      console.error(`CORS blocked origin: ${origin}`);
       callback(new Error('Not allowed by CORS'));
     }
   },
-  credentials: true, // Allow cookies if needed in future
+  credentials: true,
   optionsSuccessStatus: 200,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
